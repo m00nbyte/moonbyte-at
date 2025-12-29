@@ -1,0 +1,23 @@
+// src/styles/_scrollbar.sass
+
+@reference "tailwindcss"
+
+html
+    @apply scroll-smooth
+
+    &::-webkit-scrollbar,
+    & textarea::-webkit-scrollbar,
+    & pre::-webkit-scrollbar
+        @apply w-2
+        @apply h-2
+
+    &::-webkit-scrollbar-thumb,
+    & textarea::-webkit-scrollbar-thumb,
+    & pre::-webkit-scrollbar-thumb
+        @apply bg-[#3b3b3b]
+        @apply border-r-0
+
+    &::-webkit-scrollbar-track,
+    & textarea::-webkit-scrollbar-track,
+    & pre::-webkit-scrollbar-track
+        @apply bg-[#222222]

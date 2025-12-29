@@ -1,0 +1,13 @@
+/* TEAM */
+Owner: Sven Sommerbauer
+Location: Maria Enzersdorf, Austria
+Contact: office[at]moonbyte[dot]at
+Encryption: https://keybase.pub/m00nbyte/public-key.asc
+Github: m00nbyte
+
+/* SITE */
+Last Update: 2026/01/01
+Language: English
+Standards: HTML5, CSS3, ES6
+Components: NextJS, TypeScript, Tailwind, ...
+IDE: Visual Studio Code, PuTTY
