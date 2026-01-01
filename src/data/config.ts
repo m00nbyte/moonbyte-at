@@ -97,6 +97,13 @@ const projectsList = [
         subtitle: 'Format And Validate JSON'
     },
     {
+        href: 'https://livediff.pages.dev/',
+        imageSrc: '/img/projects/livediff.webp',
+        alt: 'Live Diff Checker',
+        title: 'Live Diff Checker',
+        subtitle: 'Compare and find differences in text files'
+    },
+    {
         href: 'https://moonedit.pages.dev/',
         imageSrc: '/img/projects/moonedit.webp',
         alt: 'Live Code Editor',
