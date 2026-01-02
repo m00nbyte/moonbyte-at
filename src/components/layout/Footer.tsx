@@ -19,7 +19,7 @@ export default function Footer() {
                     privacy policy
                 </Link>
                 |
-                <button className="ga-cb" onClick={() => window.CookieConsent.showPreferences()}>
+                <button className="ga-cb cursor-pointer" onClick={() => window.CookieConsent.showPreferences()}>
                     cookie settings
                 </button>
             </div>
