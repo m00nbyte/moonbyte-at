@@ -80,11 +80,25 @@ const projectsList = [
         subtitle: "Analyze and report your website's infrastructure"
     },
     {
-        href: 'https://prettyurl.pages.dev/',
-        imageSrc: '/img/projects/prettyurl.webp',
-        alt: 'Pretty URL',
-        title: 'Pretty URL',
-        subtitle: 'Parse and analyze any URLs'
+        href: 'https://domainchecker.dev/',
+        imageSrc: '/img/projects/domainchecker.webp',
+        alt: 'Domain Availability Check',
+        title: 'Domain Availability Check',
+        subtitle: 'Check domain names for availability'
+    },
+    {
+        href: 'https://moonedit.pages.dev/',
+        imageSrc: '/img/projects/moonedit.webp',
+        alt: 'Live Code Editor',
+        title: 'Live Code Editor',
+        subtitle: 'Edit HTML, CSS, JavaScript live'
+    },
+    {
+        href: 'https://livediff.pages.dev/',
+        imageSrc: '/img/projects/livediff.webp',
+        alt: 'Live Diff Checker',
+        title: 'Live Diff Checker',
+        subtitle: 'Compare and find differences in text files'
     },
     {
         href: 'https://extracthtml.pages.dev/',
@@ -101,18 +115,11 @@ const projectsList = [
         subtitle: 'Format And Validate JSON'
     },
     {
-        href: 'https://livediff.pages.dev/',
-        imageSrc: '/img/projects/livediff.webp',
-        alt: 'Live Diff Checker',
-        title: 'Live Diff Checker',
-        subtitle: 'Compare and find differences in text files'
-    },
-    {
-        href: 'https://moonedit.pages.dev/',
-        imageSrc: '/img/projects/moonedit.webp',
-        alt: 'Live Code Editor',
-        title: 'Live Code Editor',
-        subtitle: 'Edit HTML, CSS, JavaScript live'
+        href: 'https://prettyurl.pages.dev/',
+        imageSrc: '/img/projects/prettyurl.webp',
+        alt: 'Pretty URL',
+        title: 'Pretty URL',
+        subtitle: 'Parse and analyze any URLs'
     }
 ];
 
