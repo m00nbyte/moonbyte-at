@@ -1,6 +1,6 @@
 {
     "name": "@m00nbyte/moonbyte-at",
-    "version": "0.0.1",
+    "version": "0.0.5",
     "private": true,
     "scripts": {
         "dev": "next dev",

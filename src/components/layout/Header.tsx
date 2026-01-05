@@ -4,7 +4,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { NavigationItem } from '@/types';
 
@@ -13,8 +13,35 @@ export default function Header() {
     const headerRef = useRef<HTMLHeadElement>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState<string>('');
 
     const isMainPage = pathname === '/';
+
+    const navigationItems: NavigationItem[] = useMemo(
+        () => [
+            {
+                href: '#about',
+                label: 'about',
+                tooltip: 'about'
+            },
+            {
+                href: '#services',
+                label: 'services',
+                tooltip: 'services'
+            },
+            {
+                href: '#showcase',
+                label: 'showcase',
+                tooltip: 'showcase'
+            },
+            {
+                href: '#contact',
+                label: 'contact',
+                tooltip: 'contact'
+            }
+        ],
+        []
+    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,32 +70,46 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [isMainPage]);
 
-    const navigationItems: NavigationItem[] = [
-        {
-            href: '#about',
-            label: 'about',
-            tooltip: 'about'
-        },
-        {
-            href: '#services',
-            label: 'services',
-            tooltip: 'services'
-        },
-        {
-            href: '#showcase',
-            label: 'showcase',
-            tooltip: 'showcase'
-        },
-        {
-            href: '#contact',
-            label: 'contact',
-            tooltip: 'contact'
-        }
-    ];
-
     useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
+        if (!isMainPage) return;
+
+        const sections = document.querySelectorAll('section[id]');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    if (id) {
+                        setActiveSection(`#${id}`);
+
+                        if (history.pushState) {
+                            history.pushState(null, '', `#${id}`);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => {
+            if (section.id) {
+                observer.observe(section);
+            }
+        });
+
+        return () => {
+            sections.forEach((section) => {
+                if (section.id) {
+                    observer.unobserve(section);
+                }
+            });
+        };
+    }, [isMainPage]);
 
     useEffect(() => {
         if (isMobileMenuOpen) {
@@ -81,6 +122,10 @@ export default function Header() {
             document.body.style.overflow = 'unset';
         };
     }, [isMobileMenuOpen]);
+
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+    }, [pathname]);
 
     return (
         <div className="header-wrapper sticky top-0 z-[9999]">
@@ -116,28 +161,25 @@ export default function Header() {
 
                         {isMainPage ? (
                             <nav className="hidden md:flex items-center space-x-2">
-                                {isMainPage ? (
-                                    navigationItems.map((item) => (
-                                        <Link
-                                            key={item.href}
-                                            href={item.href}
-                                            className={`flex items-center gap-2 px-3 transition-all cursor-pointer py-2 rounded-md ${
-                                                isHeaderScrolled
-                                                    ? 'hover:bg-stone-600/40 text-stone-800'
-                                                    : 'hover:bg-stone-600/20 text-white'
-                                            }`}
-                                        >
-                                            {item.label}
-                                        </Link>
-                                    ))
-                                ) : (
+                                {navigationItems.map((item) => (
                                     <Link
-                                        href="/"
-                                        className="flex items-center gap-2 px-3 transition-all cursor-pointer py-2 rounded-md hover:bg-stone-600/40 text-stone-800"
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`flex items-center gap-2 px-3 transition-all cursor-pointer py-2 rounded-md ${
+                                            isHeaderScrolled
+                                                ? 'hover:bg-stone-600/40 text-stone-800'
+                                                : 'hover:bg-stone-600/20 text-white'
+                                        } ${
+                                            activeSection === item.href
+                                                ? isHeaderScrolled
+                                                    ? 'bg-stone-600/40 font-semibold'
+                                                    : 'bg-white/20 font-semibold'
+                                                : ''
+                                        }`}
                                     >
-                                        home
+                                        {item.label}
                                     </Link>
-                                )}
+                                ))}
                             </nav>
                         ) : (
                             <nav className="flex items-center space-x-2">
@@ -219,7 +261,7 @@ export default function Header() {
                                     href={item.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={`flex items-center gap-3 px-4 py-3 transition-all hover:text-stone-200 cursor-pointer hover:bg-stone-800 rounded-lg transform transition-all duration-300 ease-out ${
-                                        pathname?.startsWith(item.href) ? 'bg-stone-300 text-stone-800' : ''
+                                        activeSection === item.href ? 'bg-stone-800 text-stone-200 font-semibold' : ''
                                     } ${isMobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}`}
                                     style={{
                                         transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms'

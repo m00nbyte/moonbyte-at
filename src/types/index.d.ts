@@ -17,7 +17,6 @@ declare global {
 export interface NavigationItem {
     href: string;
     label: string;
-    tooltip: string;
     hasDropdown?: boolean;
     subItems?: {
         href: string;
