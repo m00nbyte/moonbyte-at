@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6 - 2026-01-06
+
+-   change: add header highlight
+
 ## 0.0.5 - 2026-01-05
 
 -   change: update nav items

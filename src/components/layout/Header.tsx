@@ -128,7 +128,7 @@ export default function Header() {
     }, [pathname]);
 
     return (
-        <div className="header-wrapper sticky top-0 z-[9999]">
+        <>
             <header ref={headerRef} className="border-b border-transparent relative transition-all duration-300">
                 <div className="px-4 mx-auto">
                     <div className="flex items-center justify-between">
@@ -274,6 +274,6 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
